@@ -1,0 +1,76 @@
+
+Table:book_master
+------------------------------------------------------
+create table book_master(
+Book_code varchar(10),
+title varchar(20) constraint title_notnull not null,
+Author varchar(20) constraint author_notnull not null,
+Issue_Status varchar(20),
+Is_issued number(1),
+constraint code_pk primary key(book_code),
+constraint issued_chk check(Is_issued in (1,0)),
+constraint issue_chk check(Issue_Status in ('Issuable', 'Notissuable'))
+);
+
+Table:Member_master
+------------------------------------------------------
+create table member_master(
+Member_code varchar(10),
+Member_Name varchar(20) constraint Member_name_notnull not null,
+Member_Type varchar(20),
+No_of_copies number(4),
+constraint membercode_pk primary key(Member_code),
+constraint type_chk check(Member_Type in ('Student', 'Faculty'))
+);
+
+Table:Book_Issue
+-----------------------------------------------------
+create table Book_Issue(
+Issue_serialno number GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+Issue_date Date default SYSDATE  not null,
+Return_date date not null,
+Book_code varchar(10),
+Member_code varchar(10),
+constraint serialno_pk primary key(Issue_serialno),
+constraint code_fk foreign key(Book_code) references book_master,
+constraint membercode_fk foreign key(Member_code) references member_master
+);
+
+
+Insert Query(book_master):
+----------------------------------------------------------------------
+insert into book_master values('B010','Macbeth','Shakespeare','Issuable',0);
+insert into book_master values('B011','Two States','Chetan Bhagat','Notissuable',1);
+insert into book_master values('B012','Animal Farm','George Orwell','Issuable',1);
+insert into book_master values('B013','Ben Hur','Lewis Wallace','Issuable',0);
+insert into book_master values('B014','Chitra','R.N.Tagore','Notissuable',1);
+insert into book_master values('B015','Divine Comedy','Dante','Issuable',0);
+insert into book_master values('B016','Arthashastra','Kautilya','Notissuable',1);
+insert into book_master values('B017','Geetanjali','Rabindra','Issuable',1);
+insert into book_master values('B018','Java','James Gosling','Notissuable',1);
+
+Insert Query(Member_master)
+------------------------------------------------------------------------------
+insert into member_master values('M001','Aliasgar','Student',0);
+insert into member_master values('M002','Rahul','Student',1);
+insert into member_master values('M003','Ramesh','Faculty',4);
+insert into member_master values('M004','Mayank','Student',0);
+insert into member_master values('M005','Anjali','Faculty',0);
+insert into member_master values('M006','Anand','Faculty',5);
+insert into member_master values('M007','Akash','Student',0);
+insert into member_master values('M008','Roshni','Faculty',6);
+insert into member_master values('M009','Madhav','Student',1);
+insert into member_master values('M010','Samay','Faculty',2);
+
+Insert Query(Book_Issue)
+------------------------------------------------------------------------------
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '1996-01-25','B010','M002');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2020-02-25','B012','M006');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2012-11-26','B010','M001');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2014-04-25','B013','M008');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2015-03-25','B015','M010');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2019-01-28','B010','M006');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2018-05-05','B012','M009');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2005-09-06','B013','M003');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2009-08-07','B015','M008');
+insert into Book_Issue (Return_date,Book_code,Member_code) values (DATE '2010-07-07','B010','M010');
