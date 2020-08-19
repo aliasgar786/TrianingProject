@@ -37,7 +37,7 @@
 	<br>
 	<br>
 	<a href="IssueBook.jsp">Issue New Book</a>
-	<html:link action="/updateBook">Update Book</html:link>
+	<a href="updateBook.jsp">Update Book</a>
 	<a href="deleteBook.jsp">Delete Book</a>
 </body>
 </html>

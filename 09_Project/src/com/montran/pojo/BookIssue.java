@@ -1,6 +1,6 @@
 package com.montran.pojo;
 
-import java.util.Date; 
+import java.sql.Date;  
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,11 +28,11 @@ public class BookIssue {
 	@Column(name="Return_date")
 	private Date returnDate;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="book_code")
 	private Book book;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="member_code")
 	private Member member;
 	

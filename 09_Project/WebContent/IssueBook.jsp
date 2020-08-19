@@ -16,17 +16,17 @@
 	long millis = System.currentTimeMillis();
 	Date date = new Date(millis);
 	String date1 = "";
-	String message = "";
-	String message2 = "";
+	String message;
+	String message2;
 	int serialNo;
-	String issueStatus = "";%>
+	String issueStatus;%>
 
 	<h3>Book Issue Details</h3>
 	<hr>
 	<html:form action="issueBook" method="post">
 		<table>
 			<tr>
-				<td><html:submit>Issue Serial No</html:submit></td>
+				<td><html:submit property="issueSerialbtn" value="Issue Serial No">Issue Serial No</html:submit></td>
 				<%
 					if (request.getAttribute("serialNo") != null) {
 					serialNo = Integer.parseInt(request.getAttribute("serialNo").toString());
@@ -37,7 +37,8 @@
 			<tr>
 				<td>Member Code</td>
 				<td><html:text property="memberCode" size="20" maxlength="20"></html:text></td>
-				<td><html:submit>Verify Member Code</html:submit></td>
+				<td><html:submit property="memberbtn" value="Verify Member Code">Verify Member Code</html:submit></td>
+				<td><html:errors property="member.error"/></td>
 			</tr>
 			<tr>
 				<td>Name</td>
@@ -63,8 +64,8 @@
 			<tr>
 				<td>Book code</td>
 				<td><html:text property="bookCode" size="20" maxlength="20"></html:text></td>
-				<td><html:submit>Verify Book Code</html:submit></td>
-
+				<td><html:submit property="bookbtn" value="Verify Book Code">Verify Book Code</html:submit></td>
+				<td><html:errors property="book.error"/></td>
 			</tr>
 			<tr>
 				<td>Title</td>
@@ -110,7 +111,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><html:submit>Issue Book</html:submit></td>
+				<td><html:submit property="issueBookbtn" value="Issue Book">Issue Book</html:submit></td>
 				<td>
 					<%
 						if (request.getAttribute("issueStatus") != null) {

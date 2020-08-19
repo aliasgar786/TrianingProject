@@ -1,5 +1,6 @@
 package com.montran.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -56,8 +57,21 @@ public class BookDAO {
 	
 	public void getIssueBook(int serialNo) {
 		session = SessionFactoryUtil.getFactory().openSession();
+		transaction = session.beginTransaction();
 		BookIssue issue=session.get(BookIssue.class, serialNo);
 		session.delete(issue);
+		transaction.commit();
+		session.close();
+	}
+	
+	public void updateBook(int serialNo,Date issueDate,Date returnDate) {
+		session = SessionFactoryUtil.getFactory().openSession();
+		transaction = session.beginTransaction();
+		BookIssue issue=session.get(BookIssue.class, serialNo);
+		issue.setIssueDate(issueDate);
+		issue.setReturnDate(returnDate);
+		session.update(issue);
+		transaction.commit();
 		session.close();
 	}
 }

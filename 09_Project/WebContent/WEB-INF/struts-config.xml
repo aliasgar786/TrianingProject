@@ -7,6 +7,7 @@
 	<form-beans>
 		<form-bean name="IssueNewBookForm" type="com.montran.form.IssueNewBook"/>
 		<form-bean name="DeleteForm" type="com.montran.form.DeleteBookForm"/>
+		<form-bean name="UpdateForm" type="com.montran.form.UpdateForm"/>
 	</form-beans>
 		
 	<action-mappings>
@@ -16,19 +17,21 @@
 		</action>
 		
 		<action path="/issueBook" type="com.montran.action.IssueBookAction"
-		 name="IssueNewBookForm">
-		<forward name="success" path="/IssueBook.jsp"></forward>
+		 name="IssueNewBookForm" validate="true" input="/IssueBook.jsp">
+		 <forward name="member" path="/IssueBook.jsp"></forward>
+		 <forward name="book" path="/IssueBook.jsp"></forward>
+		<forward name="success" path="/bookDetails.do"></forward>
 		</action>
 
 		<action path="/deleteBook" type="com.montran.action.DeleteBook" 
 		name="DeleteForm">
-		<forward name="success" path="/deleteBook.jsp"></forward>
+		<forward name="success" path="/bookDetails.do"></forward>
 		</action>
 		
-		<action path="/updateBook" type="com.montran.action.IssueBookAction" 
-		>
-		<forward name="success" path="/updateBook.jsp"></forward>
+		<action path="/updateBook" type="com.montran.action.UpdateBookAction" 
+		name="UpdateForm">
+		<forward name="success" path="/bookDetails.do"></forward>
 		</action>
 	</action-mappings>
-	<message-resources parameter="Common" />
+	<message-resources parameter="messages" />
 </struts-config>

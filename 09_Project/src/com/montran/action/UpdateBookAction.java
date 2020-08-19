@@ -9,16 +9,19 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.montran.dao.BookDAO;
-import com.montran.form.DeleteBookForm;
+import com.montran.form.UpdateForm;
 import com.montran.pojo.BookIssue;
 
-public class DeleteBook extends Action {
+public class UpdateBookAction extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		DeleteBookForm bookForm = (DeleteBookForm) form;
+		UpdateForm updateForm = (UpdateForm) form;
 		BookDAO dao = new BookDAO();
-		dao.getIssueBook(bookForm.getIssueNo());
+		BookIssue issue = new BookIssue();
+	
+		dao.updateBook(updateForm.getSerialNo(),updateForm.getIssueDate(),updateForm.getDueDate());
+
 		return mapping.findForward("success");
 	}
 }

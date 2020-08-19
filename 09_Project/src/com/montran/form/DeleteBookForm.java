@@ -13,5 +13,4 @@ public class DeleteBookForm extends ActionForm{
 		this.issueNo = issueNo;
 	}
 
-	
 }
